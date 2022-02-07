@@ -1,16 +1,14 @@
-//
-//  GameViewController.swift
-//  MAPD724-W2022-ICE1
-//
-//  Created by Tom Tsiliopoulos on 2022-01-12.
-//
-
 import UIKit
 import SpriteKit
 import GameplayKit
 
 class GameViewController: UIViewController {
 
+//    @IBOutlet weak var LivesLabel: UILabel!
+//    @IBOutlet weak var ScoreLabel: UILabel!
+    
+    @IBOutlet weak var ScoreLabel: UILabel!
+    @IBOutlet weak var LivesLabel: UILabel!
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -28,10 +26,13 @@ class GameViewController: UIViewController {
             }
             
             view.ignoresSiblingOrder = true
-            
-            view.showsFPS = true
-            view.showsNodeCount = true
         }
+        // Ininitialize the Lives and Score
+        CollisionManager.gameViewController = self
+        ScoreManager.Score = 0
+        ScoreManager.Lives = 10
+        updateLivesLabel()
+        updateScoreLabel()
     }
 
     override var shouldAutorotate: Bool {
@@ -49,4 +50,15 @@ class GameViewController: UIViewController {
     override var prefersStatusBarHidden: Bool {
         return true
     }
+    
+    func updateScoreLabel() -> Void
+    {
+        ScoreLabel.text = "Score: \(ScoreManager.Score)"
+    }
+    
+    func updateLivesLabel() -> Void
+    {
+        LivesLabel.text = "Lives: \(ScoreManager.Lives)"
+    }
+    
 }
